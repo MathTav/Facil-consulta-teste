@@ -32,7 +32,7 @@ export default {
     data() {
         return {
             Profissionals: [],
-            componentSelect: 'register-step-2',
+            componentSelect: 'register-step-1',
             step1: {},
             step2: {},
             backup1: false,
