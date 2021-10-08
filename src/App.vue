@@ -23,7 +23,6 @@ body {
   padding: 0;
   background-color: #ffe766 !important;
   color: #282828 !important;
-  font-family:'Opens Sans' !important;
   font-size: 22px !important;
 }
 
@@ -64,9 +63,9 @@ body {
 
 .warning {
   color: red;
-  font-family: 'Opens Sans' !important;
   font-weight: bold !important;
   font-size: 14px !important;
+  margin-bottom: 0;
 }
 
 .invalidData {
@@ -131,6 +130,8 @@ label {
 
 
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Open+Sans:wght@400;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
 
 @media only screen and (max-width: 990px) {
 

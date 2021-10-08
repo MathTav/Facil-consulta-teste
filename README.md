@@ -7,6 +7,7 @@ Front-End selective test Facil Consulta
 - Vue 3
 - Vue Router
 - Vue Mask
+- Vue Money
 - Bootstrap 5
 
 

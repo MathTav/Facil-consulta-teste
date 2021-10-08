@@ -33,13 +33,13 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text test" style="background-color: #483698" id="inputGroup-sizing-default"><p style="color: white">R$</p></span>
                             </div>
-                                <input type="text" :class="{'invalidData' : checkValue}" class="form-control" id="validationTooltip01" v-model.number="value" placeholder="Valor" required>
+                                <input type="text" :class="{'invalidData' : checkValue}" class="form-control" id="validationTooltip01" v-model="value" v-money="money" placeholder="Valor" required>
                             </div>
                             <p v-if="checkValue" class="warning">
                                 Valor invalido!
+                                 <span v-if="valueFormated < 30">(mínimo de 30 R$)</span>
+                                 <span v-if="valueFormated > 30">(máximo de 350 R$)</span>
                             </p>
-                            
-
                         </div>
                         </div>
                         <div class="row">
@@ -115,12 +115,19 @@ export default {
     props: ['step1', 'step2' ,'backup2'],
     data() {
         return {
+                money: {
+                    decimal: ',',
+                    thousands: '.',
+                    precision: 2,
+                    masked: false /* doesn't work with directive */
+                },
                 checkSpecialty: false,
                 checkValue: false,
                 checkPayment: false,
                 card: false,
                 credit: false,
                 index: 1,
+                valueFormated: null,
                 specialties: [
                     {
                         nameSpecialty: 'Cardiologia',
@@ -160,6 +167,8 @@ export default {
     },
     methods: {
         onSubmit(){
+            this.valueFormated = Number(this.value.replace(',', '.'));
+            console.log(this.valueFormated);
             const findIndex = this.paymentMethod.findIndex(pay => pay == 'Cartão  de crédito')
             if (findIndex != -1) {
                 this.paymentMethod.splice(findIndex, 1);
@@ -167,7 +176,6 @@ export default {
             if (this.card) {
                 this.paymentMethod.push('Cartão  de crédito');
             }
-            console.log('PM', this.paymentMethod);
 
             let count = 0;
 
@@ -178,7 +186,7 @@ export default {
                 this.checkSpecialty = true;
                 count++;
             }
-            if (this.value == null || this.value < 30 || this.value > 350) {
+            if (this.valueFormated == null || Number(this.valueFormated) < 30 || this.valueFormated > 350) {
                 this.checkValue = true;
                 count++;
             }
